@@ -21,6 +21,11 @@ code {
 	background: rgba(0, 0, 0, 0.05);
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	font-size: 100%;
+	display: inline-block;
+	overflow: auto;
+	max-width: 100%;
+	vertical-align: middle;
+	white-space: nowrap;
 }
 
 pre {
