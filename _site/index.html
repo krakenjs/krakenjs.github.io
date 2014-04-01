@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>krakenjs - Give your node.js express apps some extra arms</title>
+	<meta name="description" content="Give your node.js express apps some extra arms" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/syntax.css" />
+	<link rel="stylesheet" href="css/kraken.css" />
+</head>
+<body data-spy="scroll" data-target="#documentation-nav">
+	<header id="header" role="banner">
+		<div class="ocean">
+			<div class="rocks">
+				<div class="container">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						  </button>
+						  <a href="http://paypal.github.io" class="navbar-brand"><img src="img/paypalopensource.svg" width="160" height="20" alt="PayPal open source" /></a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav">
+								<li><a href="#documentation">Get Started</a></li>
+								<li><a href="#examples">Examples</a></li>
+								<li><a href="https://github.com/krakenjs/kraken-js">GitHub</a></li>
+							</ul>
+						</div>
+					</nav>
+
+					<div class="col-sm-2 hidden-xs">
+						<img src="img/kraken.svg" alt="kraken logo" class="logo" />
+					</div>
+					<div class="col-sm-10">
+						<h1>kraken<em>js</em></h1>
+						<h2>Give your node.js express apps some extra arms</h2>
+
+						<a class="btn btn-custom" href="#gettingstarted">Get Started</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+<main role="main">
+
+    <div id="features">
+        <div class="container">
+            <div id="features" class="doc">
+
+
+<h2 id="the_kraken_suite">The kraken suite</h2>
+
+<p>Kraken is the main pillar of the framework, but the following modules can also be used independently.</p>
+</div>
+        </div>
+    </div>
+
+    <div id="documentation">
+        <div class="container">
+
+            <nav id="documentation-nav" class="col-sm-3 hidden-xs">
+            	<ul class="nav" role="navigation"></ul>
+            </nav>
+
+            <div class="col-sm-9">
+                <div id="gettingstarted" class="doc">
+
+
+<h2 id="getting_started">Getting started</h2>
+
+<h4 id="1_install_the_generator">1. Install the generator</h4>
+
+<p>Start by installing the generator globally using npm: <code>sudo npm install -g generator-kraken</code></p>
+
+<h4 id="2_create_a_project">2. Create a project</h4>
+
+<p>Once installed, you can create a basic project using the generator. Type <code>yo kraken</code> and follow the prompts:</p>
+
+<pre class="shell"><code class="shell">
+$ yo kraken
+
+     ,&#39;&quot;&quot;`.
+    / _  _ \
+    |(@)(@)|   Release the Kraken!
+    )  __  (
+   /,&#39;))((`.\
+  (( ((  )) ))
+   `\ `)(&#39; /&#39;
+
+[?] Application name: HelloWorld
+[?] Description: A test kraken application
+[?] Author: YourName GoesHere
+...
+</code></pre>
+
+<p>The generator will create a new directory for your application, set up an empty project and download all the necessary dependencies.</p>
+
+<h4 id="3_start_your_server">3. Start your server</h4>
+
+<p>To run your project, just go into the newly created directory and type <code>npm start</code>:</p>
+
+<pre class="shell"><code class="shell">
+$ cd HelloWorld
+$ npm start
+
+&gt; helloworld@0.0.1 start ~/HelloWorld
+&gt; node index.js
+
+Listening on 8000
+</code></pre>
+
+<p>Your kraken application will start up on port 8000. You can visit it at <a href="http://localhost:8000">http://localhost:8000</a>. If all goes well, your very polite application will say hello.</p>
+
+<h3 id="structure_of_a_project">Structure of a Project</h3>
+
+<p>Kraken keeps your code organized by splitting up the configuration, content+templates and routing logic into different places so that it’s easy to keep track of everything and to easily swap out components. Let’s start by looking at the base structure of the project you just created:</p>
+
+<pre><code>
+/config  
+Application and middleware configuration
+
+/controllers
+Routes and logic
+
+/locales
+Language specific content bundles
+
+/models
+Models
+
+/public
+Web resources that are publicly available
+
+/public/templates
+Server and browser-side templates
+
+/tests
+Unit and functional test cases
+
+index.js
+Application entry point 
+</code></pre>
+
+<p>Let’s say you want to create a simple application. As your application grows, this becomes unmanageable and messy. Kraken helps you stay organized by imposing a sound structure and strategy.</p>
+
+<p>First let’s look at our basic <code>index.js</code> entry point:</p>
+
+<pre class="js"><code class="js">
+&#39;use strict&#39;;
+ 
+var kraken = require(&#39;kraken-js&#39;),
+    app = {};
+ 
+// Fired when an app configures itself
+app.configure = function (nconf, next) {
+    next();
+};
+ 
+// Fired at the beginning of an incoming request
+app.requestStart = function (server) { };
+ 
+// Fired before routing occurs
+app.requestBeforeRoute = function (server) { };
+ 
+// Fired after routing occurs
+app.requestAfterRoute = function requestAfterRoute(server) { };
+ 
+kraken.create(app).listen(function (err) {
+    if (err) {
+        console.error(err.stack);
+    }
+});
+</code></pre>
+
+<p>As you can see, the entry point simply provides hooks for configuration, and request-specific functionality that is called at the start of the request, as well as before and after the routing takes place.</p>
+
+<p>So, where’s all the configuration? Where are the routes?</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<p>Kraken’s configuration can be found in the <code>config/app.json</code> file.</p>
+
+<p>This JSON file contains key value pairs that are loaded at runtime. The advantage of this is that all your application configuration is in a single, well-known place; and you can swap it out without having to touch a single line of code.</p>
+
+<h4 id="development_vs_production_environments">Development vs. Production environments</h4>
+
+<p>A common scenario is that development environments have slightly different parameters than production. Kraken allows you to define a second file <code>config/app-development.json</code> with alternate values.</p>
+
+<p>You can control which file is loaded by defining an environment variable: <code>NODE_ENV</code> and setting its value to <code>production</code> or <code>development</code> as appropriate.</p>
+
+<h3 id="security">Security</h3>
+
+<p>Security is provided out-of-the-box by the <a href="http://github.com/krakenjs/lusca">Lusca</a> module. Lusca is middleware for express, and it follows <a href="http://www.owasp.org/">OWASP</a> best practices by enabling the following request/response headers for all calls:</p>
+
+<ul>
+<li><a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29">Cross Site Request Forgery</a></li>
+
+<li><a href="https://www.owasp.org/index.php/Content_Security_Policy">Content Security Policy</a></li>
+
+<li><a href="http://support.microsoft.com/kb/290333">Platform for Privacy Preferences Project</a></li>
+
+<li><a href="https://www.owasp.org/index.php/Clickjacking">X-FRAME-OPTIONS</a></li>
+
+<li>And more!</li>
+</ul>
+
+<p>If you want to disable or configure them, please see the <a href="http://github.com/krakenjs/lusca">Lusca README</a>.</p>
+
+<h3 id="routes">Routes</h3>
+
+<p>Kraken moves the routing logic into separate files in the <code>controllers</code> folder, allowing you to group routes by functionality.</p>
+
+<p>For example, a route for your home page, would use a <code>controllers/index.js</code> file that looks as follows:</p>
+
+<pre class="js"><code class="js">
+&#39;use strict&#39;;
+
+var IndexModel = require(&#39;../models/index&#39;);
+module.exports = function (server) {
+    var model = new IndexModel();
+ 
+    server.get(&#39;/&#39;, function (req, res) {
+        res.render(&#39;index&#39;, model);
+    });
+};
+</code></pre>
+
+<p>This file would define the routes and the logic for the home page. The advantage of keeping routes and logic segregated in individual files starts to show as the application grows. If something fails, it’s very easy to pinpoint where things went wrong.</p>
+
+<p>Kraken is built on top of express, so the rest of the logic should be familiar to Node developers</p>
+
+<h3 id="models">Models</h3>
+
+<p>Kraken also separates data models from the controller logic, resulting in cleaner, more organized code. Data models live in the <code>models</code> folder.</p>
+
+<p>When a new controller is created, the framework will also create a simple model for you.</p>
+
+<pre class="js"><code class="js">
+&#39;use strict&#39;;
+
+module.exports = function IndexModel() {
+    return {
+        name: &#39;myApp&#39;
+    };
+};
+</code></pre>
+
+<p>While not very complex, this model serves as a base to build upon. See the <a href="https://github.com/lmarkus/Kraken_Example_Shopping_Cart">Kraken Shopping Cart</a> example for more complex usage of models.</p>
+
+<h3 id="templates">Templates</h3>
+
+<p>Kraken uses <a href="http://linkedin.github.io/dustjs/">LinkedIn’s Dust</a> as the templating language of choice. <a href="http://github.com/krakenjs/adaro">Adaro</a> is the module responsible for rendering and managing the templates.</p>
+
+<p>Templates are loaded from the <code>public/templates</code> directory. Because they reside in the public folder, this allows kraken to use the same templates on the server side as well as the client side, allowing you to reuse code.</p>
+
+<p>If we wanted to greet our customers, a basic template would be:</p>
+
+<pre class="xml"><code class="xml">
+&lt;h1&gt;Hello {name}!&lt;/h1&gt;
+</code></pre>
+
+<h3 id="localization">Localization</h3>
+
+<p>Thanks to <a href="http://github.com/krakenjs/makara">Makara</a>, kraken has the ability to load content bundles on the fly, based on the request context. If we wanted to greet a user in their native language (e.g.: Spanish), we can simply add this context to the response before rendering the template:</p>
+
+<pre class="js"><code class="js">
+var customerLocality = &#39;es_ES&#39;;
+res.locals.context = {locality: customerLocality};
+var model = {name: &#39;Antonio Banderas&#39;};
+res.render(&#39;index&#39;,model);
+</code></pre>
+
+<p>We would also change our template as follows, using a <code>@pre type=&quot;content&quot;</code> tag:</p>
+
+<pre class="xml"><code class="xml">
+&lt;h1&gt;{@pre type=&quot;content&quot; key=&quot;index.greeting&quot;/}&lt;/h1&gt;
+</code></pre>
+
+<p>This instructs the framework to pick up the index.greeting string from one of the locale content bundles.</p>
+
+<p>The <code>locales</code> directory holds these bundles, organized by country and language. The bundles are nothing more than simple <code>key=value</code> .property files. If our sample application caters to English and Spanish speakers, we would create two bundles:</p>
+
+<p><code>locales/US/en/index.properties</code> to hold <code>index.greeting=Hello {name}!</code></p>
+
+<p>and</p>
+
+<p><code>locales/ES/es/index.properties</code> to hold <code>index.greeting=Hola {name}!</code></p>
+
+<p>So, in the above example, since the locality is set to <code>es_ES</code>, the framework would pick the second bundle, and display:</p>
+
+<pre><code>
+Hola Antonio Banderas!
+</code></pre>
+
+<h3 id="faq">FAQ</h3>
+
+<h4 id="how_can_i_contribute_to_this_project">How can I contribute to this project?</h4>
+
+<p>Bugs and new features should be submitted using <a href="https://github.com/krakenjs/kraken-js/issues/new">Github issues</a>. Please include with a detailed description and the expected behavior. If you would like to submit a change yourself do the following steps.</p>
+
+<ul>
+<li>Fork it.</li>
+
+<li>Create a feature branch.</li>
+
+<li>Commit a test that fails due to the bug</li>
+
+<li>Commit a fix that makes the test pass</li>
+
+<li>Open a <a href="https://github.com/krakenjs/kraken-js/pulls">pull request</a>.</li>
+</ul>
+
+<h4 id="there_is_a_typo_on_this_page">There is a typo on this page!</h4>
+
+<p>Good catch! This page is built from the <code>krakenjs.github.io</code> repository. You can <a href="https://github.com/krakenjs/krakenjs.github.io/issues/new">let us know about it</a>, or better yet, send us a <a href="https://github.com/krakenjs/krakenjs.github.io/pulls">pull request</a>.</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>Here’s a few examples to get you going with kraken:</p>
+
+<ul>
+<li>
+<p><strong><a href="https://github.com/lmarkus/Kraken_Example_Shopping_Cart">Kraken Shopping Cart</a></strong><br />An end-to-end example showing how to build a shopping cart that integrates with PayPal</p>
+</li>
+
+<li>
+<p><strong><a href="https://github.com/lmarkus/Kraken_Example_Passport">Kraken Passport Integration</a></strong><br />Authenticate and securely store user credentials using Passport, Mongo and bcrypt</p>
+</li>
+
+<li>
+<p><strong><a href="https://github.com/lensam69/Kraken_Example_Localization">Localization and Internationalization</a></strong><br />Greet users in different languages (Including Klingon!). Shows support for localized content bundles.</p>
+</li>
+
+<li>
+<p><strong><a href="https://github.com/lmarkus/Kraken_Example_Date_Format_Helper">Custom Dust.js Helper</a></strong><br />Format dates painlessly in your dust templates by writing a custom helper. Includes localization support.</p>
+</li>
+
+<li>
+<p><strong><a href="https://github.com/lmarkus/Kraken_Example_Layouts">Dynamic Layouts</a></strong><br />Easily switch between different layouts, making your application skinnable.</p>
+</li>
+
+<li>
+<p><strong><a href="https://github.com/lmarkus/Kraken_Example_Configuration">Custom configuration</a></strong><br />Shows how to use kraken’s configuration files, and how to retrieve the values stored there.</p>
+</li>
+
+<li>
+<p><strong><a href="https://github.com/lensam69/Kraken_Example_Custom_Middleware">Deploying middleware</a></strong><br />Create a custom page counter. Explains how and when middleware is deployed in the application life-cycle.</p>
+</li>
+</ul>
+</div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+
+<footer id="footer" role="contentinfo">
+    <div class="container">
+        <ul>
+            <li>Designed with ❤ and care by <a href="http://www.paypal.com" alt="PayPal">PayPal</a></li>
+            <li>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0.html" alt="Apache License.">Apache License v2.0</a></li>
+            <li>Documentation licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="components/jquery/dist/jquery.min.js"></script>
+<script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/kraken.js"></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-45342705-1', 'krakenjs.com');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>

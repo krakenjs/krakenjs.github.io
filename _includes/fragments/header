@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>{{ site.name }} - {{ site.description }}</title>
+	<meta name="description" content="{{ site.description }}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/syntax.css" />
+	<link rel="stylesheet" href="css/kraken.css" />
+</head>
+<body data-spy="scroll" data-target="#documentation-nav">
+	<header id="header" role="banner">
+		<div class="ocean">
+			<div class="rocks">
+				<div class="container">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						  </button>
+						  <a href="http://paypal.github.io" class="navbar-brand"><img src="img/paypalopensource.svg" width="160" height="20" alt="PayPal open source" /></a>
+						</div>
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav navbar-nav">
+								<li><a href="#documentation">Get Started</a></li>
+								<li><a href="#examples">Examples</a></li>
+								<li><a href="https://github.com/krakenjs/kraken-js">GitHub</a></li>
+							</ul>
+						</div>
+					</nav>
+
+					<div class="col-sm-2 hidden-xs">
+						<img src="img/kraken.svg" alt="kraken logo" class="logo" />
+					</div>
+					<div class="col-sm-10">
+						<h1>kraken<em>js</em></h1>
+						<h2>{{site.description}}</h2>
+
+						<a class="btn btn-custom" href="#gettingstarted">Get Started</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
