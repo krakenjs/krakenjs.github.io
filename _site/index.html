@@ -108,9 +108,7 @@
 <h4 id="2_create_a_project">2. Create a project</h4>
 
 <p>Once installed, you can create a basic project using the generator. Type <code>yo kraken</code> and follow the prompts:</p>
-
-<pre class="shell"><code class="shell">
-$ yo kraken
+<div class='highlight'><pre><code class='text'>$ yo kraken
 
      ,&#39;&quot;&quot;`.
     / _  _ \
@@ -124,32 +122,26 @@ $ yo kraken
 [?] Description: A test kraken application
 [?] Author: YourName GoesHere
 ...
-</code></pre>
-
+</code></pre></div>
 <p>The generator will create a new directory for your application, set up an empty project and download all the necessary dependencies.</p>
 
 <h4 id="3_start_your_server">3. Start your server</h4>
 
 <p>To run your project, just go into the newly created directory and type <code>npm start</code>:</p>
-
-<pre class="shell"><code class="shell">
-$ cd HelloWorld
+<div class='highlight'><pre><code class='text'>$ cd HelloWorld
 $ npm start
 
 &gt; helloworld@0.0.1 start ~/HelloWorld
 &gt; node index.js
 
 Listening on 8000
-</code></pre>
-
+</code></pre></div>
 <p>Your kraken application will start up on port 8000. You can visit it at <a href="http://localhost:8000">http://localhost:8000</a>. If all goes well, your very polite application will say hello.</p>
 
 <h3 id="structure_of_a_project">Structure of a Project</h3>
 
 <p>Kraken keeps your code organized by splitting up the configuration, content+templates and routing logic into different places so that it’s easy to keep track of everything and to easily swap out components. Let’s start by looking at the base structure of the project you just created:</p>
-
-<pre><code>
-/config  
+<div class='highlight'><pre><code class='text'>/config  
 Application and middleware configuration
 
 /controllers
@@ -172,39 +164,35 @@ Unit and functional test cases
 
 index.js
 Application entry point 
-</code></pre>
-
+</code></pre></div>
 <p>Let’s say you want to create a simple application. As your application grows, this becomes unmanageable and messy. Kraken helps you stay organized by imposing a sound structure and strategy.</p>
 
 <p>First let’s look at our basic <code>index.js</code> entry point:</p>
-
-<pre class="js"><code class="js">
-&#39;use strict&#39;;
+<div class='highlight'><pre><code class='javascript'><span class='s1'>&#39;use strict&#39;</span><span class='p'>;</span>
  
-var kraken = require(&#39;kraken-js&#39;),
-    app = {};
+<span class='kd'>var</span> <span class='nx'>kraken</span> <span class='o'>=</span> <span class='nx'>require</span><span class='p'>(</span><span class='s1'>&#39;kraken-js&#39;</span><span class='p'>),</span>
+    <span class='nx'>app</span> <span class='o'>=</span> <span class='p'>{};</span>
  
-// Fired when an app configures itself
-app.configure = function (nconf, next) {
-    next();
-};
+<span class='c1'>// Fired when an app configures itself</span>
+<span class='nx'>app</span><span class='p'>.</span><span class='nx'>configure</span> <span class='o'>=</span> <span class='kd'>function</span> <span class='p'>(</span><span class='nx'>nconf</span><span class='p'>,</span> <span class='nx'>next</span><span class='p'>)</span> <span class='p'>{</span>
+    <span class='nx'>next</span><span class='p'>();</span>
+<span class='p'>};</span>
  
-// Fired at the beginning of an incoming request
-app.requestStart = function (server) { };
+<span class='c1'>// Fired at the beginning of an incoming request</span>
+<span class='nx'>app</span><span class='p'>.</span><span class='nx'>requestStart</span> <span class='o'>=</span> <span class='kd'>function</span> <span class='p'>(</span><span class='nx'>server</span><span class='p'>)</span> <span class='p'>{</span> <span class='p'>};</span>
  
-// Fired before routing occurs
-app.requestBeforeRoute = function (server) { };
+<span class='c1'>// Fired before routing occurs</span>
+<span class='nx'>app</span><span class='p'>.</span><span class='nx'>requestBeforeRoute</span> <span class='o'>=</span> <span class='kd'>function</span> <span class='p'>(</span><span class='nx'>server</span><span class='p'>)</span> <span class='p'>{</span> <span class='p'>};</span>
  
-// Fired after routing occurs
-app.requestAfterRoute = function requestAfterRoute(server) { };
+<span class='c1'>// Fired after routing occurs</span>
+<span class='nx'>app</span><span class='p'>.</span><span class='nx'>requestAfterRoute</span> <span class='o'>=</span> <span class='kd'>function</span> <span class='nx'>requestAfterRoute</span><span class='p'>(</span><span class='nx'>server</span><span class='p'>)</span> <span class='p'>{</span> <span class='p'>};</span>
  
-kraken.create(app).listen(function (err) {
-    if (err) {
-        console.error(err.stack);
-    }
-});
-</code></pre>
-
+<span class='nx'>kraken</span><span class='p'>.</span><span class='nx'>create</span><span class='p'>(</span><span class='nx'>app</span><span class='p'>).</span><span class='nx'>listen</span><span class='p'>(</span><span class='kd'>function</span> <span class='p'>(</span><span class='nx'>err</span><span class='p'>)</span> <span class='p'>{</span>
+    <span class='k'>if</span> <span class='p'>(</span><span class='nx'>err</span><span class='p'>)</span> <span class='p'>{</span>
+        <span class='nx'>console</span><span class='p'>.</span><span class='nx'>error</span><span class='p'>(</span><span class='nx'>err</span><span class='p'>.</span><span class='nx'>stack</span><span class='p'>);</span>
+    <span class='p'>}</span>
+<span class='p'>});</span>
+</code></pre></div>
 <p>As you can see, the entry point simply provides hooks for configuration, and request-specific functionality that is called at the start of the request, as well as before and after the routing takes place.</p>
 
 <p>So, where’s all the configuration? Where are the routes?</p>
@@ -244,20 +232,18 @@ kraken.create(app).listen(function (err) {
 <p>Kraken moves the routing logic into separate files in the <code>controllers</code> folder, allowing you to group routes by functionality.</p>
 
 <p>For example, a route for your home page, would use a <code>controllers/index.js</code> file that looks as follows:</p>
+<div class='highlight'><pre><code class='javascript'><span class='s1'>&#39;use strict&#39;</span><span class='p'>;</span>
 
-<pre class="js"><code class="js">
-&#39;use strict&#39;;
+<span class='kd'>var</span> <span class='nx'>IndexModel</span> <span class='o'>=</span> <span class='nx'>require</span><span class='p'>(</span><span class='s1'>&#39;../models/index&#39;</span><span class='p'>);</span>
 
-var IndexModel = require(&#39;../models/index&#39;);
-module.exports = function (server) {
-    var model = new IndexModel();
+<span class='nx'>module</span><span class='p'>.</span><span class='nx'>exports</span> <span class='o'>=</span> <span class='kd'>function</span> <span class='p'>(</span><span class='nx'>server</span><span class='p'>)</span> <span class='p'>{</span>
+    <span class='kd'>var</span> <span class='nx'>model</span> <span class='o'>=</span> <span class='k'>new</span> <span class='nx'>IndexModel</span><span class='p'>();</span>
  
-    server.get(&#39;/&#39;, function (req, res) {
-        res.render(&#39;index&#39;, model);
-    });
-};
-</code></pre>
-
+    <span class='nx'>server</span><span class='p'>.</span><span class='nx'>get</span><span class='p'>(</span><span class='s1'>&#39;/&#39;</span><span class='p'>,</span> <span class='kd'>function</span> <span class='p'>(</span><span class='nx'>req</span><span class='p'>,</span> <span class='nx'>res</span><span class='p'>)</span> <span class='p'>{</span>
+        <span class='nx'>res</span><span class='p'>.</span><span class='nx'>render</span><span class='p'>(</span><span class='s1'>&#39;index&#39;</span><span class='p'>,</span> <span class='nx'>model</span><span class='p'>);</span>
+    <span class='p'>});</span>
+<span class='p'>};</span>
+</code></pre></div>
 <p>This file would define the routes and the logic for the home page. The advantage of keeping routes and logic segregated in individual files starts to show as the application grows. If something fails, it’s very easy to pinpoint where things went wrong.</p>
 
 <p>Kraken is built on top of express, so the rest of the logic should be familiar to Node developers</p>
@@ -267,17 +253,14 @@ module.exports = function (server) {
 <p>Kraken also separates data models from the controller logic, resulting in cleaner, more organized code. Data models live in the <code>models</code> folder.</p>
 
 <p>When a new controller is created, the framework will also create a simple model for you.</p>
+<div class='highlight'><pre><code class='javascript'><span class='s1'>&#39;use strict&#39;</span><span class='p'>;</span>
 
-<pre class="js"><code class="js">
-&#39;use strict&#39;;
-
-module.exports = function IndexModel() {
-    return {
-        name: &#39;myApp&#39;
-    };
-};
-</code></pre>
-
+<span class='nx'>module</span><span class='p'>.</span><span class='nx'>exports</span> <span class='o'>=</span> <span class='kd'>function</span> <span class='nx'>IndexModel</span><span class='p'>()</span> <span class='p'>{</span>
+    <span class='k'>return</span> <span class='p'>{</span>
+        <span class='nx'>name</span><span class='o'>:</span> <span class='s1'>&#39;myApp&#39;</span>
+    <span class='p'>};</span>
+<span class='p'>};</span>
+</code></pre></div>
 <p>While not very complex, this model serves as a base to build upon. See the <a href="https://github.com/lmarkus/Kraken_Example_Shopping_Cart">Kraken Shopping Cart</a> example for more complex usage of models.</p>
 
 <h3 id="templates">Templates</h3>
@@ -287,28 +270,18 @@ module.exports = function IndexModel() {
 <p>Templates are loaded from the <code>public/templates</code> directory. Because they reside in the public folder, this allows kraken to use the same templates on the server side as well as the client side, allowing you to reuse code.</p>
 
 <p>If we wanted to greet our customers, a basic template would be:</p>
-
-<pre class="xml"><code class="xml">
-&lt;h1&gt;Hello {name}!&lt;/h1&gt;
-</code></pre>
-
+<div class='highlight'><pre><code class='html'><span class='nt'>&lt;h1&gt;</span>Hello {name}!<span class='nt'>&lt;/h1&gt;</span>
+</code></pre></div>
 <h3 id="localization">Localization</h3>
 
 <p>Thanks to <a href="http://github.com/krakenjs/makara">Makara</a>, kraken has the ability to load content bundles on the fly, based on the request context. If we wanted to greet a user in their native language (e.g.: Spanish), we can simply add this context to the response before rendering the template:</p>
-
-<pre class="js"><code class="js">
-var customerLocality = &#39;es_ES&#39;;
-res.locals.context = {locality: customerLocality};
-var model = {name: &#39;Antonio Banderas&#39;};
-res.render(&#39;index&#39;,model);
-</code></pre>
-
+<div class='highlight'><pre><code class='javascript'><span class='nx'>res</span><span class='p'>.</span><span class='nx'>locals</span><span class='p'>.</span><span class='nx'>context</span> <span class='o'>=</span> <span class='p'>{</span> <span class='nx'>locality</span><span class='o'>:</span> <span class='s1'>&#39;es_ES&#39;</span> <span class='p'>};</span>
+<span class='kd'>var</span> <span class='nx'>model</span> <span class='o'>=</span> <span class='p'>{</span> <span class='nx'>name</span><span class='o'>:</span> <span class='s1'>&#39;Antonio Banderas&#39;</span> <span class='p'>};</span>
+<span class='nx'>res</span><span class='p'>.</span><span class='nx'>render</span><span class='p'>(</span><span class='s1'>&#39;index&#39;</span><span class='p'>,</span><span class='nx'>model</span><span class='p'>);</span>
+</code></pre></div>
 <p>We would also change our template as follows, using a <code>@pre type=&quot;content&quot;</code> tag:</p>
-
-<pre class="xml"><code class="xml">
-&lt;h1&gt;{@pre type=&quot;content&quot; key=&quot;index.greeting&quot;/}&lt;/h1&gt;
-</code></pre>
-
+<div class='highlight'><pre><code class='html'><span class='nt'>&lt;h1&gt;</span>{@pre type=&quot;content&quot; key=&quot;index.greeting&quot;/}<span class='nt'>&lt;/h1&gt;</span>
+</code></pre></div>
 <p>This instructs the framework to pick up the index.greeting string from one of the locale content bundles.</p>
 
 <p>The <code>locales</code> directory holds these bundles, organized by country and language. The bundles are nothing more than simple <code>key=value</code> .property files. If our sample application caters to English and Spanish speakers, we would create two bundles:</p>
@@ -320,11 +293,8 @@ res.render(&#39;index&#39;,model);
 <p><code>locales/ES/es/index.properties</code> to hold <code>index.greeting=Hola {name}!</code></p>
 
 <p>So, in the above example, since the locality is set to <code>es_ES</code>, the framework would pick the second bundle, and display:</p>
-
-<pre><code>
-Hola Antonio Banderas!
-</code></pre>
-
+<div class='highlight'><pre><code class='text'>Hola Antonio Banderas!
+</code></pre></div>
 <h3 id="faq">FAQ</h3>
 
 <h4 id="how_can_i_contribute_to_this_project">How can I contribute to this project?</h4>

@@ -24,16 +24,14 @@ code {
 }
 
 pre {
-	margin: 1.5em 0;
+	margin: 2em 0;
 	background: #000;
 	color: #fff;
+	font-size: 16px;
 }
 
 pre code {
-	display: inline-block;
-	margin-top: -1em;
-	margin-bottom: 0.5em;
-	font-size: 16px;
+	border: 0;
 }
 
 #header {

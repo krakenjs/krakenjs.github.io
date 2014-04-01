@@ -12,7 +12,8 @@ Start by installing the generator globally using npm: `sudo npm install -g gener
 
 Once installed, you can create a basic project using the generator. Type `yo kraken` and follow the prompts:
 
-```shell
+
+{% highlight text %}
 $ yo kraken
 
      ,'""`.
@@ -27,7 +28,8 @@ $ yo kraken
 [?] Description: A test kraken application
 [?] Author: YourName GoesHere
 ...
-```
+{% endhighlight %}
+
 
 The generator will create a new directory for your application, set up an empty project and download all the necessary dependencies.
 
@@ -37,7 +39,8 @@ The generator will create a new directory for your application, set up an empty 
 
 To run your project, just go into the newly created directory and type `npm start`:
 
-```shell
+
+{% highlight text %}
 $ cd HelloWorld
 $ npm start
 
@@ -45,7 +48,8 @@ $ npm start
 > node index.js
 
 Listening on 8000
-```
+{% endhighlight %}
+
 
 Your kraken application will start up on port 8000. You can visit it at [http://localhost:8000](http://localhost:8000). If all goes well, your very polite application will say hello.
 
@@ -55,7 +59,8 @@ Your kraken application will start up on port 8000. You can visit it at [http://
 
 Kraken keeps your code organized by splitting up the configuration, content+templates and routing logic into different places so that it's easy to keep track of everything and to easily swap out components. Let's start by looking at the base structure of the project you just created:
 
-```
+
+{% highlight text %}
 /config  
 Application and middleware configuration
 
@@ -79,13 +84,15 @@ Unit and functional test cases
 
 index.js
 Application entry point 
-```
+{% endhighlight %}
+
 
 Let's say you want to create a simple application. As your application grows, this becomes unmanageable and messy. Kraken helps you stay organized by imposing a sound structure and strategy.
 
 First let's look at our basic `index.js` entry point:
 
-```js
+
+{% highlight javascript %}
 'use strict';
  
 var kraken = require('kraken-js'),
@@ -110,7 +117,8 @@ kraken.create(app).listen(function (err) {
         console.error(err.stack);
     }
 });
-```
+{% endhighlight %}
+
 
 As you can see, the entry point simply provides hooks for configuration, and request-specific functionality that is called at the start of the request, as well as before and after the routing takes place.
 
@@ -155,10 +163,12 @@ Kraken moves the routing logic into separate files in the `controllers` folder, 
 
 For example, a route for your home page, would use a `controllers/index.js` file that looks as follows:
 
-```js
+
+{% highlight javascript %}
 'use strict';
 
 var IndexModel = require('../models/index');
+
 module.exports = function (server) {
     var model = new IndexModel();
  
@@ -166,7 +176,8 @@ module.exports = function (server) {
         res.render('index', model);
     });
 };
-```
+{% endhighlight %}
+
 
 This file would define the routes and the logic for the home page. The advantage of keeping routes and logic segregated in individual files starts to show as the application grows. If something fails, it's very easy to pinpoint where things went wrong.
 
@@ -180,7 +191,8 @@ Kraken also separates data models from the controller logic, resulting in cleane
 
 When a new controller is created, the framework will also create a simple model for you.
 
-```js
+
+{% highlight javascript %}
 'use strict';
 
 module.exports = function IndexModel() {
@@ -188,7 +200,8 @@ module.exports = function IndexModel() {
         name: 'myApp'
     };
 };
-```
+{% endhighlight %}
+
 
 While not very complex, this model serves as a base to build upon. See the [Kraken Shopping Cart](https://github.com/lmarkus/Kraken_Example_Shopping_Cart) example for more complex usage of models.
 
@@ -201,28 +214,30 @@ Templates are loaded from the `public/templates` directory. Because they reside 
 
 If we wanted to greet our customers, a basic template would be:
 
-```html
+
+{% highlight html %}
 <h1>Hello {name}!</h1>
-```
+{% endhighlight %}
 
 
 ### Localization
 
 Thanks to [Makara](http://github.com/krakenjs/makara), kraken has the ability to load content bundles on the fly, based on the request context. If we wanted to greet a user in their native language (e.g.: Spanish), we can simply add this context to the response before rendering the template:
 
-```js
-var customerLocality = 'es_ES';
-res.locals.context = {locality: customerLocality};
-var model = {name: 'Antonio Banderas'};
+
+{% highlight javascript %}
+res.locals.context = { locality: 'es_ES' };
+var model = { name: 'Antonio Banderas' };
 res.render('index',model);
-```
+{% endhighlight %}
 
 
 We would also change our template as follows, using a `@pre type="content"` tag:
 
-```html
+
+{% highlight html %}
 <h1>{@pre type="content" key="index.greeting"/}</h1>
-```
+{% endhighlight %}
 
 This instructs the framework to pick up the index.greeting string from one of the locale content bundles.
 
@@ -236,9 +251,10 @@ and
 
 So, in the above example, since the locality is set to `es_ES`, the framework would pick the second bundle, and display:
 
-```
+
+{% highlight text %}
 Hola Antonio Banderas!
-```
+{% endhighlight %}
  
 
 ### FAQ
