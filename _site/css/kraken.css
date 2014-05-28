@@ -195,7 +195,7 @@ pre code {
 	position: relative;
 }
 
-#documentation h2, #documentation h3, #documentation h4, #documentation h5 {
+#documentation h2, #documentation h4, #documentation h5 {
 	margin: 2.5em 0 1em;
 }
 
@@ -203,6 +203,10 @@ pre code {
 	padding-bottom: 10px;
 	border-bottom: 1px solid #0d79be;
 	font-weight: bold;
+}
+
+#documentation h3 {
+  padding: 2.5em 0 1em;
 }
 
 #documentation a {
