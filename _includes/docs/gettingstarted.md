@@ -17,14 +17,16 @@ Once installed, you can create a basic project using the generator. Type `yo kra
 $ yo kraken
 
      ,'""`.
-    / _  _ \
+hh  / _  _ \
     |(@)(@)|   Release the Kraken!
     )  __  (
    /,'))((`.\
   (( ((  )) ))
    `\ `)(' /'
 
-[?] Application name: HelloWorld
+Tell me a bit about your application:
+
+[?] Name: HelloWorld
 [?] Description: A test kraken application
 [?] Author: YourName GoesHere
 ...
@@ -44,10 +46,10 @@ To run your project, just go into the newly created directory and type `npm star
 $ cd HelloWorld
 $ npm start
 
-> helloworld@0.0.1 start ~/HelloWorld
+> helloworld@0.1.0 start ~/HelloWorld
 > node index.js
 
-Listening on 8000
+[development] Listening on http://localhost:8000
 {% endhighlight %}
 
 
@@ -62,13 +64,16 @@ Kraken keeps your code organized by splitting up the configuration, content+temp
 
 {% highlight text %}
 /config  
-Application and middleware configuration
+Application configuration including environment-specific configs
 
 /controllers
 Routes and logic
 
 /locales
 Language specific content bundles
+
+/lib
+Common libraries to be used across your app
 
 /models
 Models
@@ -79,11 +84,14 @@ Web resources that are publicly available
 /public/templates
 Server and browser-side templates
 
+/tasks
+Grunt tasks to be automatically registered by [grunt-config-dir](https://github.com/logankoester/grunt-config-dir)
+
 /tests
 Unit and functional test cases
 
 index.js
-Application entry point 
+Application entry point
 {% endhighlight %}
 
 
@@ -94,33 +102,43 @@ First let's look at our basic `index.js` entry point:
 
 {% highlight javascript %}
 'use strict';
- 
+
+
 var kraken = require('kraken-js'),
-    app = {};
- 
-// Fired when an app configures itself
-app.configure = function (nconf, next) {
-    next();
-};
- 
-// Fired at the beginning of an incoming request
-app.requestStart = function (server) { };
- 
-// Fired before routing occurs
-app.requestBeforeRoute = function (server) { };
- 
-// Fired after routing occurs
-app.requestAfterRoute = function requestAfterRoute(server) { };
- 
-kraken.create(app).listen(function (err) {
-    if (err) {
-        console.error(err.stack);
-    }
+    app = require('express')(),
+    options = require('./lib/spec')(app),
+    port = process.env.PORT || 8000;
+
+
+app.use(kraken(options));
+
+
+app.listen(port, function (err) {
+    console.log('[%s] Listening on http://localhost:%d', app.settings.env, port);
 });
 {% endhighlight %}
 
+And `./lib/spec.js` returns a simple object:
 
-As you can see, the entry point simply provides hooks for configuration, and request-specific functionality that is called at the start of the request, as well as before and after the routing takes place.
+{% highlight javascript %}
+'use strict';
+
+
+module.exports = function spec(app) {
+
+    return {
+        onconfig: function (config, next) {
+            config.get('view engines:js:renderer:arguments').push(app);
+
+            next(null, config);
+        }
+    };
+};
+{% endhighlight %}
+
+
+
+As you can see from the `index.js` entry point, kraken is just an express middleware. Our `spec.js` just returns an object that defines an `onconfig`. That function is called when the application begins configuration.
 
 So, where's all the configuration? Where are the routes?
 
@@ -128,15 +146,17 @@ So, where's all the configuration? Where are the routes?
 
 ### Configuration
 
-Kraken's configuration can be found in the `config/app.json` file.
+Kraken's configuration can be found in the `config/config.json` file.
 
 This JSON file contains key value pairs that are loaded at runtime. The advantage of this is that all your application configuration is in a single, well-known place; and you can swap it out without having to touch a single line of code.
+
+This config file is also where you can define middleware and specify it's load-order. To find out more about, check out [meddleware](https://github.com/krakenjs/meddleware).
 
 
 
 #### Development vs. Production environments
 
-A common scenario is that development environments have slightly different parameters than production. Kraken allows you to define a second file `config/app-development.json` with alternate values.
+A common scenario is that development environments have slightly different parameters than production. Kraken allows you to define a second file `config/development.json` with alternate values.
 
 You can control which file is loaded by defining an environment variable: `NODE_ENV` and setting its value to `production` or `development` as appropriate.
 
@@ -169,10 +189,10 @@ For example, a route for your home page, would use a `controllers/index.js` file
 
 var IndexModel = require('../models/index');
 
-module.exports = function (server) {
+module.exports = function (router) {
     var model = new IndexModel();
- 
-    server.get('/', function (req, res) {
+
+    router.get('/', function (req, res) {
         res.render('index', model);
     });
 };
@@ -181,8 +201,23 @@ module.exports = function (server) {
 
 This file would define the routes and the logic for the home page. The advantage of keeping routes and logic segregated in individual files starts to show as the application grows. If something fails, it's very easy to pinpoint where things went wrong.
 
-Kraken is built on top of express, so the rest of the logic should be familiar to Node developers
+Kraken is built on top of express, so the rest of the logic should be familiar to Node developers.
 
+New to 1.x, your controllers are given an instance of your top-level `router` instead of the `app` instance, and routes are automatically determined for you based on folder-structure. For example, if you wanted to specify a handler for `/users`, simple drop this in `/controllers/users/index.js`:
+
+
+{% highlight javascript %}
+'use strict';
+
+module.exports = function (router) {
+    // notice that my route is '/' but I respond to '/users'
+    router.get('/', function (req, res) {
+        res.send('you can find me at /users');
+    });
+};
+{% endhighlight %}
+
+With 1.x, route registration is supercharged and very flexible. Check out [express-enrouten](https://github.com/krakenjs/express-enrouten) to learn more.
 
 
 ### Models
@@ -203,7 +238,7 @@ module.exports = function IndexModel() {
 {% endhighlight %}
 
 
-While not very complex, this model serves as a base to build upon. See the [Kraken Shopping Cart](https://github.com/lmarkus/Kraken_Example_Shopping_Cart) example for more complex usage of models.
+While not very complex, this model serves as a base to build upon. See the [Kraken Shopping Cart](https://github.com/krakenjs/kraken-examples/tree/master/with.shoppingcart) example for more complex usage of models.
 
 
 ### Templates
@@ -226,7 +261,7 @@ Thanks to [Makara](http://github.com/krakenjs/makara), kraken has the ability to
 
 
 {% highlight javascript %}
-res.locals.context = { locality: 'es_ES' };
+res.locals.context = { locality: { language: 'es', country: 'ES' } };
 var model = { name: 'Antonio Banderas' };
 res.render('index',model);
 {% endhighlight %}
@@ -249,13 +284,13 @@ and
 
 `locales/ES/es/index.properties` to hold `index.greeting=Hola {name}!`
 
-So, in the above example, since the locality is set to `es_ES`, the framework would pick the second bundle, and display:
+So, in the above example, since the language and country are set to `es` and `ES` respectively, the framework would pick the second bundle and display:
 
 
 {% highlight text %}
 Hola Antonio Banderas!
 {% endhighlight %}
- 
+
 
 ### FAQ
 
@@ -282,25 +317,14 @@ Good catch! This page is built from the `krakenjs.github.io` repository. You can
 
 Here's a few examples to get you going with kraken:
 
-- **[Kraken Shopping Cart](https://github.com/lmarkus/Kraken_Example_Shopping_Cart)**  
+- **[Kraken Shopping Cart](https://github.com/krakenjs/kraken-examples/tree/master/with.shoppingcart)**  
 An end-to-end example showing how to build a shopping cart that integrates with PayPal
 
-- **[Kraken Passport Integration](https://github.com/lmarkus/Kraken_Example_Passport)**  
+- **[Kraken Passport Integration](https://github.com/krakenjs/kraken-examples/tree/master/with.passport)**  
 Authenticate and securely store user credentials using Passport, Mongo and bcrypt
 
-- **[Localization and Internationalization](https://github.com/lensam69/Kraken_Example_Localization)**  
-Greet users in different languages (Including Klingon!). Shows support for localized content bundles.
+- **[Localization and Internationalization](https://github.com/krakenjs/kraken-examples/tree/master/with.i18n)**  
+Greet users in different languages. Shows support for localized content bundles.
 
-- **[Custom Dust.js Helper](https://github.com/lmarkus/Kraken_Example_Date_Format_Helper)**  
-Format dates painlessly in your dust templates by writing a custom helper. Includes localization support.
-
-- **[Dynamic Layouts](https://github.com/lmarkus/Kraken_Example_Layouts)**  
-Easily switch between different layouts, making your application skinnable.
-
-- **[Custom configuration](https://github.com/lmarkus/Kraken_Example_Configuration)**  
-Shows how to use kraken's configuration files, and how to retrieve the values stored there.
-
-- **[Deploying middleware](https://github.com/lensam69/Kraken_Example_Custom_Middleware)**  
-Create a custom page counter. Explains how and when middleware is deployed in the application life-cycle.
-
-
+- **[Specialization](https://github.com/krakenjs/kraken-examples/tree/master/with.specialization)**  
+Show different layouts to different users based on a set of rules (locality, A/B testing, etc).
