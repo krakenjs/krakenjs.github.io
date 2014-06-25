@@ -150,7 +150,7 @@ Kraken's configuration can be found in the `config/config.json` file.
 
 This JSON file contains key value pairs that are loaded at runtime. The advantage of this is that all your application configuration is in a single, well-known place; and you can swap it out without having to touch a single line of code.
 
-This config file is also where you can define middleware and specify it's load-order. To find out more about, check out [meddleware](https://github.com/krakenjs/meddleware).
+This config file is also where you can define middleware and specify it's load-order. To find out more, check out [meddleware](https://github.com/krakenjs/meddleware).
 
 
 
