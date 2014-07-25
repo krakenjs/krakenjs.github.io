@@ -306,10 +306,7 @@ Bugs and new features should be submitted using [Github issues](https://github.c
 - Open a [pull request](https://github.com/krakenjs/kraken-js/pulls).
 
 
-
-#### There is a typo on this page!
-
-Good catch! This page is built from the `krakenjs.github.io` repository. You can [let us know about it](https://github.com/krakenjs/krakenjs.github.io/issues/new), or better yet, send us a [pull request](https://github.com/krakenjs/krakenjs.github.io/pulls).
+This page is built from the `krakenjs.github.io` repository. To refine the document even further, you can [create an issue](https://github.com/krakenjs/krakenjs.github.io/issues/new), or better yet, submit a [pull request](https://github.com/krakenjs/krakenjs.github.io/pulls).
 
 
 
