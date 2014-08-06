@@ -297,7 +297,7 @@ Hola Antonio Banderas!
 
 #### How can I contribute to this project?
 
-Bugs and new features should be submitted using [Github issues](https://github.com/krakenjs/kraken-js/issues/new). Please include with a detailed description and the expected behavior. If you would like to submit a change yourself do the following steps.
+Bugs and new features should be submitted using [GitHub issues](https://github.com/krakenjs/kraken-js/issues/new). Please include with a detailed description and the expected behavior. If you would like to submit a change yourself do the following steps.
 
 - Fork it.
 - Create a feature branch.
