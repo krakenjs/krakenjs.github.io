@@ -106,7 +106,13 @@ First let's look at our basic `index.js` entry point:
 
 var kraken = require('kraken-js'),
     app = require('express')(),
-    options = require('./lib/spec')(app),
+    options = {
+        onconfig: function (config, next) {
+            config.get('view engines:js:renderer:arguments').push(app);
+
+            next(null, config);
+        }
+    },
     port = process.env.PORT || 8000;
 
 
@@ -118,27 +124,9 @@ app.listen(port, function (err) {
 });
 {% endhighlight %}
 
-And `./lib/spec.js` returns a simple object:
-
-{% highlight javascript %}
-'use strict';
 
 
-module.exports = function spec(app) {
-
-    return {
-        onconfig: function (config, next) {
-            config.get('view engines:js:renderer:arguments').push(app);
-
-            next(null, config);
-        }
-    };
-};
-{% endhighlight %}
-
-
-
-As you can see from the `index.js` entry point, kraken is just an express middleware. Our `spec.js` just returns an object that defines an `onconfig`. That function is called when the application begins configuration.
+As you can see from the `index.js` entry point, kraken is just an express middleware. The configuration is just an object that defines an `onconfig`. That function is called when the application begins configuration.
 
 So, where's all the configuration? Where are the routes?
 
