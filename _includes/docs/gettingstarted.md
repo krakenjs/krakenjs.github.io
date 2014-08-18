@@ -112,6 +112,7 @@ var kraken = require('kraken-js'),
 
             next(null, config);
         }
+        /* more options are documented in the README */
     },
     port = process.env.PORT || 8000;
 
@@ -127,6 +128,8 @@ app.listen(port, function (err) {
 
 
 As you can see from the `index.js` entry point, kraken is just an express middleware. The configuration is just an object that defines an `onconfig`. That function is called when the application begins configuration.
+
+There are a few other [options that can be set](https://github.com/krakenjs/kraken-js#options) as well as the `onconfig` handler.
 
 So, where's all the configuration? Where are the routes?
 
