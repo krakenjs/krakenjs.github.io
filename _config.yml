@@ -1,2 +1,3 @@
 name: krakenjs
 description: Give your node.js express apps some extra arms
+extendedDescription: Built at PayPal, Kraken builds upon express and enables environment-aware, dynamic configuration, advanced middleware capabilities, security, and app lifecycle events.
