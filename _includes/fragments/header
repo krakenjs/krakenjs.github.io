@@ -8,7 +8,7 @@
     <meta property="og:title" content="{{ site.description }}" />
     <meta property="og:description" content="{{ site.extendedDescription }}" />
     <meta property="og:url" content="http://lmarkus.github.io/krakenjs.github.io/" />
-    <meta property="og:image" content="http://lmarkus.github.io/krakenjs.github.io//img/krakenLogo.png" />
+    <meta property="og:image" content="http://lmarkus.github.io/krakenjs.github.io/img/krakenLogo.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/syntax.css" />
