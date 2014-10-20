@@ -1,14 +1,17 @@
 ## Getting started
 
 
+#### 1. Requirements
 
-#### 1. Install the generator
+[Nodejs](http://nodejs.org/), [NPM](https://www.npmjs.org/), [Yeoman](http://yeoman.io/), [Bower](http://bower.io/), [Express](http://expressjs.com/)
+
+
+#### 2. Install the generator
 
 Start by installing the generator globally using npm: `sudo npm install -g generator-kraken`
 
 
-
-#### 2. Create a project
+#### 3. Create a project
 
 Once installed, you can create a basic project using the generator. Type `yo kraken` and follow the prompts:
 
@@ -37,7 +40,7 @@ The generator will create a new directory for your application, set up an empty 
 
 
 
-#### 3. Start your server
+#### 4. Start your server
 
 To run your project, just go into the newly created directory and type `npm start`:
 
