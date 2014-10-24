@@ -1,6 +1,9 @@
 ## Getting started
 
 
+#### 0. Install node.js
+
+[Install node.js](http://nodejs.org), which will in turn install npm, which is used to manage all your dependencies.
 
 #### 1. Install the generator
 
