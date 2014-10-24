@@ -4,7 +4,7 @@
 
 #### 1. Install the generator
 
-Start by installing the generator globally using npm: `sudo npm install -g generator-kraken`
+Start by installing the generator globally using npm: `[sudo] npm install -g yo generator-kraken bower`
 
 
 
