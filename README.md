@@ -1,4 +1,7 @@
-# krakenjs.com
+krakenjs.com
+============
+
+Lead Maintainer: [Matt Edelman](https://github.com/grawk/)  
 
 This is the source code for krakenjs.com
 
