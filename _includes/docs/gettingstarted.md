@@ -45,7 +45,7 @@ The generator will create a new directory for your application, set up an empty 
 To run your project, just go into the newly created directory and type `npm start`:
 
 
-{% highlight text %}
+{% highlight bash %}
 $ cd HelloWorld
 $ npm start
 
@@ -288,6 +288,52 @@ Hola Antonio Banderas!
 
 ### FAQ
 
+#### How can I disable CSRF for specific routes?
+
+If you need to disable the [CSRF](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) protection provided by the [lusca module](https://github.com/krakenjs/lusca#luscacsrfoptions) for certain paths --a common use case for APIs-- you can accomplish this through the configuration file, on the middleware section.
+The strategy is to first disable the default CSRF handling, and then re-enable it for the routes we want to protect. This can be done using a [negative lookahead regular expression](http://www.regular-expressions.info/lookaround.html).
+
+> **Example:** Protect all routes, _except_ those starting with `/api` :
+
+{% highlight javascript %}
+
+{
+    "middleware": {
+        /**
+         * Override the default lusca configuration to disable CSRF handling.
+         */
+        "appsec": {
+            "module": {
+                "arguments": [
+                    {
+                        "xframe": "SAMEORIGIN",
+                        "p3p": false,
+                        "csp": false
+                    }
+                ]
+            }
+        },
+
+        /**
+         * Enable *ONLY* CSRF filtered by route.
+         * Note: The route "regex" needs the double parens
+         * because of how express parses route strings.
+         */
+        "csrf": {
+            "enabled": true,
+            "priority": 111,
+            "route": "/((?!api))*",
+            "module": {
+                "name": "lusca",
+                "method": "csrf",
+                "arguments": [ {} ]
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+<hr>
 
 #### How can I contribute to this project?
 
