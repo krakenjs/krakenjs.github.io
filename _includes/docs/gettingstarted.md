@@ -285,6 +285,13 @@ So, in the above example, since the language and country are set to `es` and `ES
 Hola Antonio Banderas!
 {% endhighlight %}
 
+### Grunt tasks
+
+Generated projects include the following grunt tasks by default:
+
+* `$ grunt build` will localize and compile your templates to the `.build` directory, and also copy static assets there
+* `$ grunt test` will run jshint as well as any mocha tests
+
 
 ### FAQ
 
