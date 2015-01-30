@@ -7,7 +7,7 @@
 
 #### 1. Install the generator
 
-Start by installing the generator globally using npm: `[sudo] npm install -g yo generator-kraken bower`
+Start by installing the generator globally using npm: `[sudo] npm install -g yo generator-kraken bower grunt-cli`
 
 
 
@@ -284,6 +284,13 @@ So, in the above example, since the language and country are set to `es` and `ES
 {% highlight text %}
 Hola Antonio Banderas!
 {% endhighlight %}
+
+### Grunt tasks
+
+Generated projects include the following grunt tasks by default:
+
+* `$ grunt build` will localize and compile your templates to the `.build` directory, and also copy static assets there
+* `$ grunt test` will run jshint as well as any mocha tests
 
 
 ### FAQ
