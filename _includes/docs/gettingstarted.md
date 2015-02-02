@@ -342,6 +342,13 @@ The strategy is to first disable the default CSRF handling, and then re-enable i
 
 <hr>
 
+#### I'm encountering `TypeError: Cannot call method 'replace' of undefined` when I run my app. Help!
+
+If you're running in production mode, Kraken will look for pre-compiled templates in the `./.build` directory.
+This error likely indicates that you have not built your project. Try running `grunt build`.
+
+<hr>
+
 #### How can I contribute to this project?
 
 Bugs and new features should be submitted using [GitHub issues](https://github.com/krakenjs/kraken-js/issues/new). Please include with a detailed description and the expected behavior. If you would like to submit a change yourself do the following steps.
