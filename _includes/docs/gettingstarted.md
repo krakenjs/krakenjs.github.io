@@ -232,7 +232,7 @@ module.exports = function IndexModel() {
 {% endhighlight %}
 
 
-While not very complex, this model serves as a base to build upon. See the [Kraken Shopping Cart](https://github.com/krakenjs/kraken-examples/tree/master/with.shoppingcart) example for more complex usage of models.
+While not very complex, this model serves as a base to build upon. See the [Kraken Shopping Cart](https://github.com/krakenjs/kraken-example-with-shoppingcart) example for more complex usage of models.
 
 
 ### Templates
@@ -368,14 +368,14 @@ This page is built from the `krakenjs.github.io` repository. To refine the docum
 
 Here's a few examples to get you going with kraken:
 
-- **[Kraken Shopping Cart](https://github.com/krakenjs/kraken-examples/tree/master/with.shoppingcart)**  
+- **[Kraken Shopping Cart](https://github.com/krakenjs/kraken-example-with-shoppingcart)**  
 An end-to-end example showing how to build a shopping cart that integrates with PayPal
 
-- **[Kraken Passport Integration](https://github.com/krakenjs/kraken-examples/tree/master/with.passport)**  
+- **[Kraken Passport Integration](https://github.com/krakenjs/kraken-example-with-passport)**  
 Authenticate and securely store user credentials using Passport, Mongo and bcrypt
 
-- **[Localization and Internationalization](https://github.com/krakenjs/kraken-examples/tree/master/with.i18n)**  
+- **[Localization and Internationalization](https://github.com/krakenjs/kraken-example-with-i18n)**  
 Greet users in different languages. Shows support for localized content bundles.
 
-- **[Specialization](https://github.com/krakenjs/kraken-examples/tree/master/with.specialization)**  
+- **[Specialization](https://github.com/krakenjs/kraken-example-with-specialization)**  
 Show different layouts to different users based on a set of rules (locality, A/B testing, etc).
