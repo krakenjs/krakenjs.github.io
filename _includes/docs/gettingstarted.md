@@ -232,7 +232,7 @@ module.exports = function IndexModel() {
 {% endhighlight %}
 
 
-While not very complex, this model serves as a base to build upon. See the [Kraken Shopping Cart](https://github.com/krakenjs/kraken-examples/tree/master/with.shoppingcart) example for more complex usage of models.
+While not very complex, this model serves as a base to build upon. See the [Kraken Shopping Cart](https://github.com/krakenjs/kraken-example-with-shoppingcart) example for more complex usage of models.
 
 
 ### Templates
