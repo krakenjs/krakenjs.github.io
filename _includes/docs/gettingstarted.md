@@ -349,6 +349,18 @@ This error likely indicates that you have not built your project. Try running `g
 
 <hr>
 
+#### How should I access configuration values in my application?
+
+Since kraken compiles your configuration at runtime -- taking in to account the environment plus shortstop handlers -- you should not attempt to `require` the JSON directly.
+
+You can access the configuration from the request: `req.app.kraken.get("my:config:property")`.
+
+You can also access the configuration in an `onconfig` handler as discussed here: https://github.com/krakenjs/kraken-js#options
+
+If you are using an onconfig handler, just be aware that startup is asynchronous. I.e. don't rely on the config value until onconfig has fired, or the app emits the start event.
+
+<hr>
+
 #### How can I contribute to this project?
 
 Bugs and new features should be submitted using [GitHub issues](https://github.com/krakenjs/kraken-js/issues/new). Please include with a detailed description and the expected behavior. If you would like to submit a change yourself do the following steps.
