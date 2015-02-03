@@ -355,7 +355,7 @@ Since kraken compiles your configuration at runtime -- taking in to account the 
 
 You can access the configuration from the request: `req.app.kraken.get("my:config:property")`.
 
-You can also access the configuration in an `onconfig` handler as discussed here: https://github.com/krakenjs/kraken-js#options
+You can also access the configuration in an `onconfig` handler as discussed here: [https://github.com/krakenjs/kraken-js#options](https://github.com/krakenjs/kraken-js#options)
 
 If you are using an onconfig handler, just be aware that startup is asynchronous. I.e. don't rely on the config value until onconfig has fired, or the app emits the start event.
 
