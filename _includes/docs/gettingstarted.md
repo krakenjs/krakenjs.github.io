@@ -391,3 +391,8 @@ Greet users in different languages. Shows support for localized content bundles.
 
 - **[Specialization](https://github.com/krakenjs/kraken-example-with-specialization)**  
 Show different layouts to different users based on a set of rules (locality, A/B testing, etc).
+
+### Recommended patterns
+
+-- **[Environment specific routing](https://github.com/krakenjs/kraken-js/wiki/Advanced-router-and-mounting-examples#using-middleware-config-to-setup-environment-specific-routes)**
+Use `NODE_ENV` specific middleware to set up routing per-environment
