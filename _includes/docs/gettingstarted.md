@@ -394,5 +394,5 @@ Show different layouts to different users based on a set of rules (locality, A/B
 
 ### Recommended patterns
 
--- **[Environment specific routing](https://github.com/krakenjs/kraken-js/wiki/Advanced-router-and-mounting-examples#using-middleware-config-to-setup-environment-specific-routes)**
-Use `NODE_ENV` specific middleware to set up routing per-environment
+- **[Environment specific routing](https://github.com/krakenjs/kraken-js/wiki/Advanced-router-and-mounting-examples#using-middleware-config-to-setup-environment-specific-routes)**
+  Use `NODE_ENV` specific middleware to set up routing per-environment
