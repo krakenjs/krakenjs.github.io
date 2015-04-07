@@ -1,9 +1,17 @@
 ## Getting started
 
 
-#### 0. Install node.js
+#### 0. Install node.js and essential build tools
 
 [Install node.js](http://nodejs.org), which will in turn install npm, which is used to manage all your dependencies.
+
+In order for the `npm install` command to work, you need these essential build tools:
+
+* Python 2.6 or 2.7
+* C++ compiler (GCC 4.2 or newer)
+* Make
+
+The method of installing these pre-requisites will vary by operating system.
 
 #### 1. Install the generator
 
