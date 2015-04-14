@@ -408,3 +408,6 @@ Use `NODE_ENV` specific middleware to set up routing per-environment
 - **[Subapp mounting](https://github.com/krakenjs/kraken-js/wiki/Using-krakenjs-middleware-config-for-express-subapps-mounting)**
 Use kraken middleware for express subapp mounting
 
+- **[Whitelisting and blacklisting routes](https://github.com/krakenjs/kraken-js/wiki/Using-krakenjs-middleware-config-for-whitelisting-and-blacklisting-routes)**
+Use kraken middleware configuration to whitelist and blacklist routes
+
