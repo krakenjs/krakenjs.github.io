@@ -192,11 +192,16 @@ pre code {
 /** Documentation **/
 
 #documentation {
+	padding-top: 70px;
 	position: relative;
 }
 
 #documentation h2, #documentation h3, #documentation h4, #documentation h5 {
 	margin: 2.5em 0 1em;
+}
+
+#documentation h2:first-child, #documentation h3:first-child, #documentation h4:first-child, #documentation h5:first-child {
+	margin-top: 0;
 }
 
 #documentation h2, #documentation h3 {
@@ -207,10 +212,6 @@ pre code {
 
 #documentation a {
 	text-decoration: underline;
-}
-
-#documentation-nav {
-	margin-top: 70px;
 }
 
 #documentation-nav ul ul {
