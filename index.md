@@ -1,3 +1,8 @@
+---
+Title: Getting Started With Kraken
+layout: frontpage
+---
+
 ## Getting started
 
 

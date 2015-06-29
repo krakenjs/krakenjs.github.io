@@ -2,14 +2,17 @@
 # This page is processed with Jekyll
 ---
 
-{% include fragments/header %}
+{% include fragments/header.html %}
 
 
 <main role="main">
 
     <div id="intro">
         <div class="container">
-            {% include fragments/doc type="features" %}
+            <div id="features" class="doc">
+                {% capture doc %}{% include fragments/features.md %}{% endcapture %}
+                {{ doc | markdownify }}
+            </div>
 		</div>
 
 		<div class="container">
@@ -47,7 +50,7 @@
             </nav>
 
             <div class="col-sm-9">
-                {% include fragments/doc type="gettingstarted" %}
+                {{content}}
             </div>
 
         </div>
@@ -56,4 +59,4 @@
 </main>
 
 
-{% include fragments/footer %}
+{% include fragments/footer.html %}
