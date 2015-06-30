@@ -22,13 +22,22 @@
                 </nav>
 
                 <div class="col-sm-2 hidden-xs">
-                    <img src="img/kraken.svg" alt="kraken logo" class="logo" />
+                    {% if page.logo %}
+                        <img src="img/{{ page.logo }}" alt="logo" clas="logo">
+                    {% else %}
+                        <img src="img/kraken.svg" alt="kraken logo" class="logo">
+                    {% endif %}
                 </div>
                 <div class="col-sm-10">
-                    <h1>kraken<em>js</em></h1>
-                    <h2>{{site.description}}</h2>
+                    {% if page.url == '/index.html' %}
+                        <h1>kraken<em>js</em></h1>
+                        <h2>{{site.description}}</h2>
 
-                    <a class="btn btn-custom" href="#gettingstarted">Get Started</a>
+                        <a class="btn btn-custom" href="{{page.url}}#gettingstarted">Get Started</a>
+                    {% else %}
+                        <h1>{{ page.title }}</h1>
+                        <h2>{{ page.description }}</h2>
+                    {% endif %}
                 </div>
             </div>
         </div>
