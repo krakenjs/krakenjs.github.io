@@ -14,8 +14,11 @@
                     </div>
                     <div class="collapse navbar-collapse" id="navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="#documentation">Get Started</a></li>
-                            <li><a href="#examples">Examples</a></li>
+                            {% if page.url != '/index.html' %}
+                            <li><a href="index.html">KrakenJS</a></li>
+                            {% endif %}
+                            <li><a href="index.html#documentation">Get Started</a></li>
+                            <li><a href="index.html#examples">Examples</a></li>
                             <li><a href="https://github.com/krakenjs/kraken-js">GitHub</a></li>
                         </ul>
                     </div>
