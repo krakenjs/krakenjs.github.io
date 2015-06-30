@@ -294,6 +294,11 @@ pre code {
     text-decoration: none;
 }
 
+#modules img {
+    width: 121px;
+    height: 131px;
+}
+
 .lusca strong {
 	color: #f6ca42;
 }

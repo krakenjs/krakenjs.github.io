@@ -1,7 +1,7 @@
 ---
 title: Adaro
 layout: documentation
-logo: Adaro.png
+logo: Adaro.svg
 description: Templating using DustJS
 ---
 
