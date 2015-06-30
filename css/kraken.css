@@ -182,6 +182,18 @@ pre code {
     background: linear-gradient(to bottom, #1a1845 0%, #004f8b 80%);
 }
 
+#oceanfade {
+    display: block;
+	background: #1a1845;
+	background: -moz-linear-gradient(top, #1a1845 0%, #004f8b 80%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1a1845), color-stop(80%, #004f8b));
+    background: -webkit-linear-gradient(top, #1a1845 0%, #004f8b 80%);
+    background: -o-linear-gradient(top, #1a1845 0%, #004f8b 80%);
+    background: -ms-linear-gradient(top, #1a1845 0%, #004f8b 80%);
+    background: linear-gradient(to bottom, #1a1845 0%, #004f8b 80%);
+    height: 3em;
+}
+
 #intro h1, #intro h2, #intro h3, #intro h4, #intro h5, #intro h6 {
 	margin-top: 40px;
 }
@@ -276,6 +288,10 @@ pre code {
 
 #modules strong, #modules a {
 	display: block;
+}
+
+#modules a {
+    text-decoration: none;
 }
 
 .lusca strong {
