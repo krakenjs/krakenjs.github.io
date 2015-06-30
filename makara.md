@@ -1,7 +1,7 @@
 ---
 title: Makara
 layout: documentation
-logo: Makara.png
+logo: Makara.svg
 description: Internationalization support for Kraken with Dust Templating
 ---
 
