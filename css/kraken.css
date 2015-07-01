@@ -107,6 +107,18 @@ pre code {
 	padding-right: 0;
 }
 
+@media (max-width: 767px) {
+    #content {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    #content {
+        margin-left: 13em;
+    }
+}
+
 #navbar-collapse {
 	padding: 0;
 }
@@ -212,6 +224,11 @@ pre code {
 
 #documentation a {
 	text-decoration: underline;
+}
+
+#documentation-nav .nav {
+    width: 13em;
+    float: left;
 }
 
 #documentation-nav ul ul {
