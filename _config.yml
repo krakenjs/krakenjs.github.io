@@ -3,3 +3,5 @@ description: Give your node.js express apps some extra arms
 extendedDescription: Built at PayPal, Kraken builds upon express and enables environment-aware, dynamic configuration, advanced middleware capabilities, security, and app lifecycle events.
 url: http://krakenjs.com
 markdown: redcarpet
+redcarpet:
+  extensions: [with_toc_data]
