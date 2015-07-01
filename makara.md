@@ -22,7 +22,7 @@ Adding Makara to an existing project
 
 In your `config/config.json`, add the middleware exported by makara to the middleware configuration.
 
-```
+```javascript
         "makara": {
             "priority": 100,
             "enabled": true,
@@ -44,7 +44,7 @@ In this case, we're using two `config:` shortstop handlers to put those configur
 
 Add the i18n and specialization configuration to `config/config.json`
 
-```
+```javascript
     "i18n": {
         "contentPath": "path:./locales",
         "fallback": "en-US"
@@ -66,7 +66,7 @@ We've left the specialization configuration very limited for the time being; for
 
 Add a middleware that sets `res.locals.locale` and `req.locale`:
 
-```
+```javascript
         "bcp47": {
             "priority": 10,
             "enabled": true,
@@ -83,7 +83,7 @@ You can write your own middleware to do this if you base deciding what locale to
 
 Set up the view (template) engines:
 
-```
+```javascript
     "view engines": {
         "dust": {
             "module": "makara",
@@ -110,7 +110,7 @@ The `js` version is used for production time builds, keeping the compilation of 
 
 Add the dust helpers configuration:
 
-```
+```javascript
     "dust": {
         "helpers": [
             "dust-makara-helpers"
@@ -161,7 +161,7 @@ Let's look at some samples and then use them to discuss various points.
 
 `index.properties` file:
 
-````
+```
 index.title=PayPal Merchant
 index.callToAction=Enroll now!
 index.greeting=Welcome {userName}
@@ -221,7 +221,7 @@ The `mode="paired"` parameter produces the content list such that you can use bo
 
 The `mode="paired"` attribute delivers the content in the form of a JSON object, which in the case of a list of months might look like:
 
-```javascript
+```json
 [{$id:0,$elt:"Jan"}, {$id:1,$elt:"Feb"},.. ]
 ```
 

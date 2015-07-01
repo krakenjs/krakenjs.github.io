@@ -9,7 +9,7 @@ If you're not using [makara] for internationalization, which uses Adaro and othe
 
 You configure it in your `config/config.json` in the `"view engines"` section:
 
-```
+```javascript
     "view engines": {
         "dust": {
             "module": "adaro",
@@ -34,7 +34,7 @@ You configure it in your `config/config.json` in the `"view engines"` section:
 
 You'd add any helpers you want to load in a `dust.helpers` section:
 
-```
+```javascript
     "dust": {
         "helpers": [
             "my-dust-helper-package",
@@ -57,7 +57,7 @@ Helpers
 
 Helpers that Adaro accepts must be wrapped in a function to instantiate them:
 
-```
+```javascript
 module.exports = function (dust, options) {
     // options are optional.
     // dust is a private instance, provided by Adaro.
