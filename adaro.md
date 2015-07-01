@@ -5,6 +5,9 @@ logo: Adaro.svg
 description: Templating using DustJS
 ---
 
+Using DustJS templating in your application
+-------------------------------------------
+
 If you're not using [makara] for internationalization, which uses Adaro and other components internally, you can use Adaro directly.
 
 You configure it in your `config/config.json` in the `"view engines"` section:
@@ -66,4 +69,4 @@ module.exports = function (dust, options) {
 };
 ```
 
-[makara]: https://github.com/krakenjs/makara
+[makara]: makara.html
