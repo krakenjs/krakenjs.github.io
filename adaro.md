@@ -65,3 +65,5 @@ module.exports = function (dust, options) {
     };
 };
 ```
+
+[makara]: https://github.com/krakenjs/makara

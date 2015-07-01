@@ -232,6 +232,7 @@ In addition to `mode="paired"` there is an alternate form, `mode="json"` This ge
 For more on using the `@provide` helper, see the [advanced helper] docs
 
 [engine-munger]: https://github.com/krakenjs/engine-munger
+[makara]: https://github.com/krakenjs/makara
 [`bcp47`]: http://npmjs.org/package/bcp47
 [@provide]: https://github.com/rragan/dust-motes/tree/master/src/helpers/data/provide
 [advanced helper]: ADVANCED.md
