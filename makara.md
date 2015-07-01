@@ -5,6 +5,9 @@ logo: Makara.svg
 description: Internationalization support for Kraken with Dust Templating
 ---
 
+Internationalizing your project
+-------------------------------
+
 Internationalizing an application is the process of making all the culture and language-senstitive parts are factored out, handled systematically and set up for translation. Internationalization is usually abbreviated as 'i18n'.
 
 There are many techniques for i18n, but the practices we've found that work are codified in the `makara` module.
