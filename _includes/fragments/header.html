@@ -19,6 +19,7 @@
                             {% endif %}
                             <li><a href="{{site.baseurl}}/index.html#documentation">Get Started</a></li>
                             <li><a href="{{site.baseurl}}/index.html#examples">Examples</a></li>
+                            <li><a href="{{site.baseurl}}/blog.html">Blog</a></li>
                             <li><a href="https://github.com/krakenjs/kraken-js">GitHub</a></li>
                         </ul>
                     </div>
@@ -37,7 +38,7 @@
                         <h2>{{site.description}}</h2>
 
                         <a class="btn btn-custom" href="{{page.url}}#getting-started">Get Started</a>
-                        <a class="btn btn-custom secondary" href="{{page.url}}#">Latest News</a>
+                        <a class="btn btn-custom secondary" href="{{site.baseurl}}/blog.html">Latest News</a>
                     {% else %}
                         <h1>{{ page.title }}</h1>
                         <h2>{{ page.description }}</h2>
