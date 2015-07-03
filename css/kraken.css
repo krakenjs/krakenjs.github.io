@@ -137,6 +137,7 @@ pre code {
 }
 
 #footer {
+	margin-top: 3em;
 	padding: 3em 0;
 	background: #e6e7e8;
 }
@@ -163,6 +164,16 @@ pre code {
 .btn-custom:hover, .btn-custom:focus {
 	background: #126ba6;
 	color: #fff;
+}
+
+.btn-custom.secondary {
+	color: #0d79be;
+	background: rgba(255, 255, 255, 0.7);
+	margin-left:20px;
+}
+.btn-custom.secondary:hover, .btn-custom.secondary:focus {
+	color: #0d79be;
+	background: rgba(255, 255, 255, 0.7);
 }
 
 
