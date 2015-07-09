@@ -15,7 +15,7 @@ The changes ended up affecting nearly every i18n package, particularly because t
 
 [localizr] and [grunt-localizr] are deprecated. They're tools for doing the static pre-inlining of messages into templates.
 
-We introduced [dust-makara-helpers], which is a wrapper around [dust-usecontent-helper] providing `{@useContent}` to load content into the context, and [dust-message-helper], providing `{@message}` and a backward compatibility alias `{@pre}`, to do the message insertion and rendering at template render time, instead of precomputed at build time. In the future, [dust-intl]'s `{@message}` helper can be used with the same or a similar syntax to [dust-message-helper]'s and will support gender and number agreement.
+We introduced [dust-makara-helpers], which is a wrapper around [dust-usecontent-helper] providing `{@useContent}` to load content into the context, and [dust-message-helper], providing `{@message}` and a backward compatibility alias `{@pre}`, to do the message insertion and rendering at template render time, instead of precomputed at build time. In the future, [dust-intl]'s `{@formatMessage}` helper can be used with a similar syntax to [dust-message-helper]'s and will support gender and number agreement.
 
 [engine-munger] has been reworked to just be a replacement View class for Express, backporting the asynchronous lookup of templates from Express 5, and extending that API to allow looking up content as well as partials and templates. It calls the template engine the same way Express 5 will, with `this` being an instance of itself, so its methods can be used from engines.
 
