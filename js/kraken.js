@@ -4,6 +4,10 @@ $(function (window, $, undefined) {
     function buildNavigation() {
         var $docnav = $('#documentation-nav .nav');
 
+        if (!$docnav.length) {
+            return;
+        }
+
         // Construct navigation elements -- kaboom!
         $('#documentation h2, #documentation h3').each(function(idx, el) {
             var $el = $(el);
