@@ -83,7 +83,7 @@ Now, let's add the Express View class replacement. In plain Express, you can jus
 
 This loads the View class, and configures its `i18n` and `specialization`. If you're not using either, you probably don't want anything in this document at all and could just use [adaro] directly, but if you are, you can leave out either if you're not using them. Here's a basic configuration at the root of `config/config.json` compatible with Kraken 1.0 generated apps:
 
-```
+```javascript
    "i18n": {
         "contentPath": "path:./locales",
         "fallback": "en-US"
@@ -156,7 +156,7 @@ git rm tasks/localizr.js
 
 Finally, make sure that each template has a corresponding `.properties` file with its localized strings, or, if that makes a lot of empty or duplicate content bundles, add `{@useContent}` helpers to your templates like so:
 
-```
+```javascript
     "dust": {
         "helpers": [
             {
