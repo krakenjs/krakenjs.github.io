@@ -223,6 +223,12 @@ pre code {
 	background: rgba(255, 255, 225, 0.15);
 }
 
+/** Blog **/
+
+#blog {
+    padding-top: 70px;
+    position: relative;
+}
 
 /** Documentation **/
 
