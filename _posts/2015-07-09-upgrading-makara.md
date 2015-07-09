@@ -47,7 +47,11 @@ The new version is a bit simpler:
         }
 ```
 
-Do the same for the `"js"` engine. The configuration is exactly the same as the `"dust"` engines. The engines do a lot less work because the express view class does more of the work itself and handles what looks up where. The `"helpers"` property is new, though, and is a list of references to modules to load as dust helpers. Let's add it now, at the root of the `config/config.json`:
+Do the same for the `"js"` engine. The configuration is exactly the same as the `"dust"` engines.
+
+At this point, you may want to consider using the `"dust"` engine even in production, but with `"cache"` turned on (the default). Caching now works properly with multiple languages, and won't continuously recompile templates in that case. The only reason to disable caching is for development.
+
+The engines do a lot less work because the express view class does more of the work itself and handles what looks up where. The `"helpers"` property is new, though, and is a list of references to modules to load as dust helpers. Let's add it now, at the root of the `config/config.json`:
 
 ```javascript
     "dust": {
