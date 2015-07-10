@@ -1,5 +1,5 @@
 ---
-title: Upgrading to Makara 2.0.0
+title: Upgrading to Makara 2
 layout: blog
 ---
 
