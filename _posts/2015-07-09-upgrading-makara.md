@@ -53,7 +53,7 @@ The new version is a bit simpler:
         }
 ```
 
-Do the same for the `"js"` engine. The configuration is exactly the same as the `"dust"` engines.
+Do the same for the `"js"` engine. The configuration is exactly the same as the `"dust"` engines, only using the `"js"` method instead of the `"dust"` method.
 
 At this point, you may want to consider using the `"dust"` engine even in production, but with `"cache"` turned on (the default). Caching now works properly with multiple languages, and won't continuously recompile templates in that case. The only reason to disable caching is for development.
 
