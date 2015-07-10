@@ -7,7 +7,7 @@ With the [release of makara 2.0.0] last week, I figured it would be a good time 
 
 First, let's install the new components and remove the old:
 
-```
+```bash
 npm rm --save adaro dustjs-helpers dustjs-linkedin engine-munger grunt-localizr
 npm install --save "makara@^2.0.0" "dust-makara-helpers@^4.0.0"
 ```
@@ -150,7 +150,7 @@ module.exports = function dustjs(grunt) {
 
 And the `tasks/localizr.js` isn't needed at all:
 
-```
+```bash
 git rm tasks/localizr.js
 ```
 
@@ -178,14 +178,14 @@ and additional steps to take.
 
 kraken-devtools needs a copy of `dustjs-linkedin@^2.7.2` in your main project, to match the version that adaro requires:
 
-```
+```bash
 npm install --save dustjs-linkedin@^2.7.2
 ```
 
 Remove the `"i18n"` block from the `"template"` section of the devtools middleware configuration in development.json. The new 
 configuration will be:
 
-```
+```javascript
                         "template": {
                             "module": "kraken-devtools/plugins/dustjs",
                             "files": "/templates/**/*.js",
