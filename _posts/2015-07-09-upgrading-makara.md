@@ -169,6 +169,37 @@ Finally, make sure that each template has a corresponding `.properties` file wit
 
 And add `{@useContent}` helpers to each template to select which bundles to load from. See [makara] for more information there.
 
+## Requesting compiled templates from the browser
+
+If your application requests pre-compiled templates from the client (browser), there are some important differences to be aware of 
+and additional steps to take.
+
+### Development mode changes
+
+kraken-devtools needs a copy of `dustjs-linkedin@^2.7.2` in your main project, to match the version that adaro requires:
+
+```
+npm install --save dustjs-linkedin@^2.7.2
+```
+
+Remove the `"i18n"` block from the `"template"` section of the devtools middleware configuration in development.json. The new 
+configuration will be:
+
+```
+                        "template": {
+                            "module": "kraken-devtools/plugins/dustjs",
+                            "files": "/templates/**/*.js",
+                            "base": "templates"
+                        },
+```
+
+### Localization changes
+
+Since compiled templates are no longer placed into locale-specific directories, a request such as `/myapp/templates/FR/fr/index.js` 
+will no longer resolve to a file. The new request will be `/myapp/templates/index.js`
+
+## Reference
+
 [makara]: http://krakenjs.com/makara
 [adaro]: http://krakenjs.com/adaro
 [engine-munger]: https://github.com/krakenjs/engine-munger
