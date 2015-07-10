@@ -8,8 +8,14 @@ With the [release of makara 2.0.0] last week, I figured it would be a good time 
 First, let's install the new components and remove the old:
 
 ```bash
-npm rm --save adaro dustjs-helpers dustjs-linkedin engine-munger grunt-localizr
+npm rm --save adaro dustjs-helpers dustjs-linkedin engine-munger 
 npm install --save "makara@^2.0.0" "dust-makara-helpers@^4.0.0"
+```
+
+If you're reworking any browser-based use of localized dust templates, go ahead and remove localizr too:
+
+```bash
+npm rm --save-dev grunt-localizr
 ```
 
 The new makara depends on its own adaro, which depends on its own dustjs, so you don't need to manage those yourself in the application as `peerDependencies` any longer.
@@ -103,7 +109,7 @@ This loads the View class, and configures its `i18n` and `specialization`. If yo
 
 At this point, rendering with the `"dust"` engine should work. For the precompiled `"js"` engine, we'll need to add some build tools.
 
-There's no need for the old localizr task. Let's remove this from `tasks/i18n.js`:
+As mentioned above, for a purely server-side templated application, there's no need for the old localizr task. If you're still using localizr-style localization in the browser, you'll need to fix that up first, but to continue our example, let's remove this from `tasks/i18n.js`:
 
 ```javascript
     grunt.registerTask('i18n', [ 'clean', 'localizr', 'dustjs', 'clean:tmp' ]);
@@ -169,12 +175,9 @@ Finally, make sure that each template has a corresponding `.properties` file wit
 
 And add `{@useContent}` helpers to each template to select which bundles to load from. See [makara] for more information there.
 
-## Requesting compiled templates from the browser
+## Browser application changes
 
-If your application requests pre-compiled templates from the client (browser), there are some important differences to be aware of 
-and additional steps to take.
-
-### Development mode changes
+If you do all of the above and remove localizr, and your application requests pre-compiled templates from the browser, there are some important differences to be aware of and additional steps to take.
 
 kraken-devtools needs a copy of `dustjs-linkedin@^2.7.2` in your main project, to match the version that adaro requires:
 
@@ -193,12 +196,9 @@ configuration will be:
                         },
 ```
 
-### Localization changes
+Since compiled templates are no longer placed into locale-specific directories, a request such as `/myapp/templates/FR/fr/index.js` will no longer resolve to a file. The new request will be `/myapp/templates/index.js`. Adjust your client accordingly, and use [dust-usecontent-helper] and [dust-message-helper] or [dust-intl] to load the content for your templates.
 
-Since compiled templates are no longer placed into locale-specific directories, a request such as `/myapp/templates/FR/fr/index.js` 
-will no longer resolve to a file. The new request will be `/myapp/templates/index.js`
-
-## Reference
+<!-- references -->
 
 [makara]: http://krakenjs.com/makara
 [adaro]: http://krakenjs.com/adaro
@@ -206,3 +206,6 @@ will no longer resolve to a file. The new request will be `/myapp/templates/inde
 [release of makara 2.0.0]: {% post_url 2015-07-06-new-i18n-for-dust %}
 [localizr]: https://github.com/krakenjs/localizr
 [dust-makara-helpers]: https://github.com/krakenjs/dust-makara-helpers
+[dust-usecontent-helper]: https://github.com/krakenjs/dust-usecontent-helper
+[dust-message-helper]: https://github.com/krakenjs/dust-message-helper
+[dust-intl]: http://formatjs.io/dust
