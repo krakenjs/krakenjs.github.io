@@ -175,6 +175,9 @@ Finally, make sure that each template has a corresponding `.properties` file wit
 
 And add `{@useContent}` helpers to each template to select which bundles to load from. See [makara] for more information there.
 
+One last thing: The integration for where these components get locale information from has solidified. Instead of `res.locals.context.locality`, your app should set up `res.locals.locale` with a BCP47-compatible object or string. If you want a module that does this based on the browser's `Accept-Language` headers, check out [express-bcp47].
+
+
 ## Browser application changes
 
 If you do all of the above and remove localizr, and your application requests pre-compiled templates from the browser, there are some important differences to be aware of and additional steps to take.
@@ -209,3 +212,4 @@ Since compiled templates are no longer placed into locale-specific directories, 
 [dust-usecontent-helper]: https://github.com/krakenjs/dust-usecontent-helper
 [dust-message-helper]: https://github.com/krakenjs/dust-message-helper
 [dust-intl]: http://formatjs.io/dust
+[express-bcp47]: https://github.com/krakenjs/express-bcp47
