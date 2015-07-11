@@ -33,3 +33,4 @@ All of this gets rolled up in the new version of [makara], made relatively easy 
 [Dust 2.7]: https://github.com/linkedin/dustjs/releases/tag/v2.7.0
 [dust 2.7.1]: https://github.com/linkedin/dustjs/releases/tag/v2.7.1
 [dust-intl]: http://formatjs.io/dust/
+[engine-munger]: https://github.com/krakenjs/engine-munger
