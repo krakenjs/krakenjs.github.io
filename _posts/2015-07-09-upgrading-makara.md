@@ -165,11 +165,11 @@ Finally, make sure that each template has a corresponding `.properties` file wit
 ```javascript
     "dust": {
         "helpers": [
-            {
-                "module": "dust-makara-helpers",
-                "arguments": [ { "autoloadTemplateContent": false } ]
-            }
-        ]
+              {
+                   "name": "dust-makara-helpers",
+                   "arguments": { "autoloadTemplateContent": false }
+              }
+       ]
     },
 ```
 
