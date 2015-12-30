@@ -355,6 +355,43 @@ The strategy is to first disable the default CSRF handling, and then re-enable i
 
 <hr>
 
+#### How can I register middleware in config?
+
+We use meddleware to facilitate the registration of middleware.
+
+> **Example:** Let's define a middleware to let any origin access the resource. Say it's in './middlewares/cors'
+
+{% highlight javascript %}
+
+module.exports = function () {
+    return function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    };
+};
+{% endhighlight %}
+
+I can include above middleware in my config like so:
+
+{% highlight javascript %}
+
+{
+    // ...
+    "middleware": {
+        "cors": {
+            "enabled": true,
+            "priority": 119,
+            "module": {
+                "name": "path: ./middlewares/cors" //"path" is a shortstop-handler
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+<hr>
+
 #### I'm encountering `TypeError: Cannot call method 'replace' of undefined` when I run my app. Help!
 
 If you're running in production mode, Kraken will look for pre-compiled templates in the `./.build` directory.
