@@ -3,9 +3,9 @@ title: Announcing construx development middleware
 layout: blog
 ---
 
-Previously, our development "hot reloading" solution for all technologies (dust, less, sass, etc) was built entirely into a single module, [kraken-devtools](https://github.com/krakenjs/kraken-devtools). Over time, it became obvious that a single module attempting to support all the different types and versions of file transformations was unmanageable.
+Previously, our development JIT-compile solution for all technologies (dust, less, sass, etc) was built entirely into a single module, [kraken-devtools](https://github.com/krakenjs/kraken-devtools). Over time, it became obvious that a single module attempting to support all the different types and versions of file transformations was unmanageable.
 
-[`construx-*` modules](https://www.npmjs.com/search?q=construx) have been available for a few months now, and if you use the latest version of the [`generator-kraken`](https://www.npmjs.com/package/generator-kraken), you will get an application which uses them. For example, generating the following application:
+[`construx-*` modules](https://www.npmjs.com/search?q=construx) have been available for a few months now. All of our example applications have been upgraded to construx. And if you use the latest version of the [`generator-kraken`](https://www.npmjs.com/package/generator-kraken), you will get an application which uses them. For example, generating the following application:
 
 ```bash
 LM-SJN-00872356:krakex medelman$ yo kraken myFreshKrakenApp
@@ -29,7 +29,7 @@ Tell me a bit about your application:
 ? JavaScript library? RequireJS
 ```
 
-You'll see the following in your `package.json` dependencies:
+Puts the following in `package.json` dependencies:
 
 ```js
 	"construx": "^1.0.0",
@@ -38,7 +38,7 @@ You'll see the following in your `package.json` dependencies:
     "construx-sass": "^1.0.0",
 ```
 
-And the following in your `development.json` `middleware` section
+And the following in your `development.json` `middleware` section:
 
 ```js
 "middleware": {
@@ -73,4 +73,4 @@ And the following in your `development.json` `middleware` section
 
 The main `construx` module orchestrates the filters defined by the other `construx-*` modules. Since all the technologies (dust, sass, etc) have their own module, we can more easily upgrade invididual filters when new versions of the given technology are released. It is also easy to author new filters using the [`construx-star` template repo](https://github.com/krakenjs/construx-star).
 
-As always, contributions to these repos (and all krakenjs repos) is welcomed and encouraged. Happy Coding!
+As always, contribution to these repos (and all krakenjs repos) is welcomed and encouraged. Happy Coding!
