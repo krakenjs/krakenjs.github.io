@@ -268,7 +268,8 @@ Thanks to [Makara](http://github.com/krakenjs/makara), kraken has the ability to
 
 
 {% highlight javascript %}
-res.locals.context = { locality: { language: 'es', country: 'ES' } };
+res.locals.locale = { language: 'es', country: 'ES' };
+
 var model = { name: 'Antonio Banderas' };
 res.render('index',model);
 {% endhighlight %}
